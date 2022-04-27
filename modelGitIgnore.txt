@@ -7,5 +7,3 @@ bin/
 *.iml
 .DS_Store
 .png
-token.txt
-.testRepo/
