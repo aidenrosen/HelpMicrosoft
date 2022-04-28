@@ -3,7 +3,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -12,7 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class App extends JFrame {	
+public class App extends JFrame {
+
+    private static Scanner tokenReader;
     public App() {
         super("Microsoft App");
        
@@ -25,6 +29,8 @@ public class App extends JFrame {
         
   
         ControlPanel controlPanel = new ControlPanel(drawingPanel);
+
+
         
         this.setSize(550, 300);
         

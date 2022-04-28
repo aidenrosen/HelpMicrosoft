@@ -1,17 +1,11 @@
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -77,9 +71,41 @@ public class DrawingPanel extends JPanel {
 		userText.setBounds(190, 80, 165, 25);
 		this.add(userText);
 
+		JLabel link = new JLabel("");
+		link.setLocation(225, 200);
+		this.add(link);
+
 		button1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
+				String path = filepathText.getText();
+				String token = passwordText.getText();
+				String username = userText.getText();
+
+				GithubHelper helper = new GithubHelper(username, token);
+				helper.createRepo(path);
+				link.setText(helper.getLink());
+				//TODO: Make this link appear on GUI
+			}
+		});
+
+		link.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				try
+				{
+					System.out.println("Clicked!");
+					Desktop.getDesktop().browse(new URI(link.getText()));
+				} catch(IOException ex)
+				{
+					throw new RuntimeException(ex);
+				} catch(URISyntaxException ex)
+				{
+					throw new RuntimeException(ex);
+				}
 			}
 		});
 
@@ -95,5 +121,7 @@ public class DrawingPanel extends JPanel {
 		g.drawImage(image2, 380, 0, 150, 100, null);
 
 	}
+
+
 
 }
