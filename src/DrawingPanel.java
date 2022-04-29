@@ -10,10 +10,12 @@ import java.net.URISyntaxException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 
@@ -39,13 +41,16 @@ public class DrawingPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		ImageIcon icon = new ImageIcon("./quinnipiacLogo1.png");
 
 		JButton button1 = new JButton("GO!");
 		button1.setLocation(225, 150);
 		button1.setSize(80, 50);
-
 		this.add(button1);
+
+		JButton disclaimer = new JButton("Disclaimer");
+		disclaimer.setLocation(400, 150);
+		disclaimer.setSize(100, 30);
+		this.add(disclaimer);
 
 		JLabel label = new JLabel("Filepath");
 		label.setBounds(135, 20, 80, 25);
@@ -71,43 +76,90 @@ public class DrawingPanel extends JPanel {
 		userText.setBounds(190, 80, 165, 25);
 		this.add(userText);
 
-		JLabel link = new JLabel("");
-		link.setLocation(225, 200);
+		JLabel linkText = new JLabel("URL:");
+		linkText.setBounds(20, 200, 80, 25);
+		this.add(linkText);
+
+		JTextField link = new JTextField(20);
+		link.setBounds(50, 200, 450, 25);
 		this.add(link);
+
+		JTextArea disclaimerText = new JTextArea();
+		disclaimerText.setBounds(400, 80, 80, 25);
+		disclaimerText.setWrapStyleWord(true);
+		disclaimerText.setLineWrap(true);
+		disclaimerText.setEditable(false);
 
 		button1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				link.setText("Sample text to see if button works");
 				String path = filepathText.getText();
 				String token = passwordText.getText();
 				String username = userText.getText();
 
+
 				GithubHelper helper = new GithubHelper(username, token);
 				helper.createRepo(path);
 				link.setText(helper.getLink());
-				//TODO: Make this link appear on GUI
+				System.out.println("clicked");
+				
+					
+//						try {
+//							Desktop.getDesktop().browse(new URI(link.getText()));
+//						} catch (IOException | URISyntaxException e1) {
+//							// TODO Auto-generated catch block
+//							e1.printStackTrace();
+//						}
+//					
+
+				// TODO: Make this link appear on GUI
 			}
+
 		});
 
-		link.addMouseListener(new MouseAdapter()
-		{
+		disclaimer.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e)
-			{
-				try
-				{
-					System.out.println("Clicked!");
-					Desktop.getDesktop().browse(new URI(link.getText()));
-				} catch(IOException ex)
-				{
-					throw new RuntimeException(ex);
-				} catch(URISyntaxException ex)
-				{
-					throw new RuntimeException(ex);
-				}
+			public void actionPerformed(ActionEvent e) {
+				JFrame frame = new JFrame();
+
+				frame.setSize(550, 300);
+				frame.setLocation(600, 0);
+
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.setVisible(true);
+				JPanel panel1 = new JPanel();
+				frame.add(panel1);
+//				JButton button3 = new JButton("OK");
+//				button3.setLocation(300, 200);
+//				button3.setSize(50, 50);
+//
+//				panel1.add(button3);
+
+				frame.add(disclaimerText);
+				disclaimerText.setText("This app was made for the purpose of "
+						+ "CSC109 and is in no way actually affliated with Micrsoft.");
+				disclaimerText.setBounds(0, 0, 400, 400);
+
+				;
 			}
+
 		});
+
+//		link.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				try {
+//					System.out.println("Clicked!");
+//					Desktop.getDesktop().browse(new URI(link.getText()));
+//				} catch (IOException ex) {
+//					throw new RuntimeException(ex);
+//				} catch (URISyntaxException ex) {
+//					throw new RuntimeException(ex);
+//				}
+//			}
+//		});
 
 	}
 
@@ -121,7 +173,5 @@ public class DrawingPanel extends JPanel {
 		g.drawImage(image2, 380, 0, 150, 100, null);
 
 	}
-
-
 
 }
