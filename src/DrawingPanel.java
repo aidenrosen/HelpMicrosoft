@@ -101,6 +101,9 @@ public class DrawingPanel extends JPanel {
 
 				GithubHelper helper = new GithubHelper(username, token);
 				helper.createRepo(path);
+				link.setText(helper.getLink());
+
+				System.out.println(link.getText());  //DEBUG
 
 				if (link.getText().isBlank()) {
 					JTextArea errorMessage = new JTextArea();
@@ -166,20 +169,6 @@ public class DrawingPanel extends JPanel {
 			}
 
 		});
-
-//		link.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				try {
-//					System.out.println("Clicked!");
-//					Desktop.getDesktop().browse(new URI(link.getText()));
-//				} catch (IOException ex) {
-//					throw new RuntimeException(ex);
-//				} catch (URISyntaxException ex) {
-//					throw new RuntimeException(ex);
-//				}
-//			}
-//		});
 
 	}
 
