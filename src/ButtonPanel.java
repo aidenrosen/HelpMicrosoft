@@ -11,7 +11,7 @@ public class ButtonPanel extends JPanel {
 		this.setLayout(new FlowLayout());
 		this.setBackground(Color.green);
 
-		JButton button1 = new JButton("Ellipse");
+		JButton button1 = new JButton("Button1");
 		button1.setSize(50, 50);
 
 		button1.addActionListener(new ActionListener() {
@@ -23,7 +23,7 @@ public class ButtonPanel extends JPanel {
 			}
 		});
 
-		JButton button2 = new JButton("Rectangle");
+		JButton button2 = new JButton("Button2");
 		button2.setSize(50, 50);
 
 		button2.addActionListener(new ActionListener() {
@@ -35,7 +35,7 @@ public class ButtonPanel extends JPanel {
 			}
 		});
 
-		JButton button3 = new JButton("Rounded Rectangle");
+		JButton button3 = new JButton("Button3");
 		button3.setSize(50, 50);
 
 		button3.addActionListener(new ActionListener() {
