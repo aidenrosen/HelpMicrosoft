@@ -93,19 +93,39 @@ public class DrawingPanel extends JPanel {
 		button1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 
-				link.setText("Sample text to see if button works");
 				String path = filepathText.getText();
 				String token = passwordText.getText();
 				String username = userText.getText();
 
-
 				GithubHelper helper = new GithubHelper(username, token);
 				helper.createRepo(path);
-				link.setText(helper.getLink());
-				System.out.println("clicked");
-				
-					
+
+				if (link.getText().isBlank()) {
+					JTextArea errorMessage = new JTextArea();
+					errorMessage.setBounds(400, 80, 80, 25);
+					errorMessage.setWrapStyleWord(true);
+					errorMessage.setLineWrap(true);
+					errorMessage.setEditable(false);
+
+					errorMessage.setText("Error, please try again. ");
+					JFrame frame = new JFrame();
+
+					frame.setSize(200, 100);
+					frame.setLocation(200, 100);
+
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					frame.setVisible(true);
+					JPanel panel1 = new JPanel();
+					frame.add(panel1);
+					frame.add(errorMessage);
+
+				} else {
+					link.setText(helper.getLink());
+					System.out.println("Good");
+				}
+
 //						try {
 //							Desktop.getDesktop().browse(new URI(link.getText()));
 //						} catch (IOException | URISyntaxException e1) {
