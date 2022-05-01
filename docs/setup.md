@@ -11,7 +11,7 @@ Then, in your respective files, add the two Java packages to the code from the r
 
 Once ran, you will see the following window.
 
-![](HelpMicrosoft.jpg)
+![](HelpMicrosoft.png)
 
 The user is prompted to type multiple inputs, and all must be filled out, other than the URL.
 
